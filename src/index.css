@@ -1,0 +1,247 @@
+/* ────────────────────────────────────────
+   IMPORT — Google Fonts (Inter)
+   ──────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────────────────────────────────────
+   BASE
+   ──────────────────────────────────────── */
+@layer base {
+  :root {
+    --color-primary:   #1e3a5f;
+    --color-secondary: #f0c040;
+    --color-bg:        #f8f9fa;
+    --color-text:      #1a1a2e;
+    --color-success:   #28a745;
+    --color-warning:   #ffc107;
+    --color-error:     #dc3545;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    @apply antialiased font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text);
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Scroll personalizado — azul marino suave */
+  ::-webkit-scrollbar       { @apply w-1.5 h-1.5; }
+  ::-webkit-scrollbar-track { @apply bg-gray-100; }
+  ::-webkit-scrollbar-thumb { @apply bg-navy-300 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-navy-400; }
+}
+
+/* ────────────────────────────────────────
+   COMPONENTES REUTILIZABLES
+   ──────────────────────────────────────── */
+@layer components {
+
+  /* ── Botones ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl text-sm font-semibold
+           bg-navy-700 text-white shadow-card
+           hover:bg-navy-800 active:bg-navy-900
+           transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl text-sm font-bold
+           bg-gold-500 text-navy-900 shadow-gold
+           hover:bg-gold-600 active:bg-gold-700
+           transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl text-sm font-medium
+           bg-white text-navy-700 border border-navy-200 shadow-card
+           hover:bg-navy-50 hover:border-navy-300
+           transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-navy-300 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl text-sm font-semibold
+           bg-red-600 text-white
+           hover:bg-red-700 active:bg-red-800
+           transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           px-3 py-1.5 rounded-lg text-sm font-medium
+           text-navy-600 hover:bg-navy-50
+           transition-colors duration-150
+           focus:outline-none;
+  }
+
+  /* ── Formularios ── */
+  .input {
+    @apply block w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm
+           text-brand-text placeholder-gray-400 bg-white shadow-card
+           focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-200
+           transition-all duration-150;
+  }
+
+  .input-error {
+    @apply border-red-400 focus:border-red-400 focus:ring-red-200;
+  }
+
+  .select {
+    @apply block w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm
+           text-brand-text bg-white shadow-card
+           focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-200
+           transition-all duration-150;
+  }
+
+  .label {
+    @apply block text-xs font-semibold text-navy-700 mb-1.5 uppercase tracking-wide;
+  }
+
+  .label-normal {
+    @apply block text-sm font-medium text-navy-800 mb-1;
+  }
+
+  /* ── Contenedores ── */
+  .card {
+    @apply bg-white rounded-2xl shadow-card border border-gray-100 p-6;
+  }
+
+  .card-sm {
+    @apply bg-white rounded-xl shadow-card border border-gray-100 p-4;
+  }
+
+  /* Tarjeta hero con gradiente navy+dorado */
+  .card-hero {
+    @apply relative overflow-hidden rounded-2xl p-6 text-white;
+    background: linear-gradient(135deg, #1e3a5f 0%, #152c47 60%, #0d1e30 100%);
+    border: 1px solid rgba(240,192,64,0.2);
+  }
+
+  .card-hero::before {
+    content: '';
+    @apply absolute inset-0 opacity-5;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(240,192,64,0.3) 0px,
+      rgba(240,192,64,0.3) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  }
+
+  /* ── Encabezados de sección ── */
+  .section-header {
+    @apply flex items-center gap-3 mb-6;
+  }
+
+  .section-header-bar {
+    @apply w-1 h-7 rounded-full bg-gold-500 shrink-0;
+  }
+
+  /* ── Tabla estándar ── */
+  .table-container {
+    @apply overflow-x-auto rounded-xl border border-gray-100 shadow-card;
+  }
+
+  .table-base {
+    @apply min-w-full divide-y divide-gray-100 text-sm;
+  }
+
+  .table-head {
+    @apply bg-navy-50;
+  }
+
+  .table-th {
+    @apply px-4 py-3 text-left text-xs font-bold text-navy-600 uppercase tracking-wider whitespace-nowrap;
+  }
+
+  .table-td {
+    @apply px-4 py-3 text-gray-700 whitespace-nowrap;
+  }
+
+  .table-row {
+    @apply bg-white hover:bg-navy-50/40 transition-colors duration-100;
+  }
+
+  .table-footer {
+    @apply bg-navy-50 font-semibold;
+  }
+
+  /* ── Badges de estado ── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold;
+  }
+
+  .badge-green  { @apply badge bg-green-100  text-green-700; }
+  .badge-yellow { @apply badge bg-amber-100  text-amber-700; }
+  .badge-red    { @apply badge bg-red-100    text-red-600; }
+  .badge-gray   { @apply badge bg-gray-100   text-gray-500; }
+  .badge-navy   { @apply badge bg-navy-100   text-navy-700; }
+  .badge-gold   { @apply badge bg-gold-100   text-gold-700; }
+  .badge-purple { @apply badge bg-purple-100 text-purple-700; }
+
+  /* ── Línea divisora con texto ── */
+  .divider-text {
+    @apply flex items-center gap-3 text-xs text-gray-400 font-medium;
+  }
+  .divider-text::before,
+  .divider-text::after {
+    content: '';
+    @apply flex-1 h-px bg-gray-200;
+  }
+
+  /* ── Skeleton loader ── */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded-lg;
+  }
+
+  /* ── Progress bar ── */
+  .progress-bar {
+    @apply h-2.5 rounded-full bg-gray-100 overflow-hidden;
+  }
+  .progress-fill {
+    @apply h-full rounded-full bg-gold-500 transition-all duration-500;
+  }
+  .progress-fill-green {
+    @apply h-full rounded-full bg-green-500 transition-all duration-500;
+  }
+}
+
+/* ────────────────────────────────────────
+   SLIDER PERSONALIZADO
+   ──────────────────────────────────────── */
+@layer utilities {
+  .slider-navy {
+    -webkit-appearance: none;
+    appearance: none;
+    @apply w-full h-2 rounded-full bg-navy-100 cursor-pointer;
+    accent-color: #1e3a5f;
+  }
+  .slider-navy::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @apply w-5 h-5 rounded-full bg-navy-700 shadow-card cursor-pointer;
+    border: 2px solid #f0c040;
+  }
+  .slider-navy::-moz-range-thumb {
+    @apply w-5 h-5 rounded-full bg-navy-700 shadow-card cursor-pointer border-0;
+    border: 2px solid #f0c040;
+  }
+}
