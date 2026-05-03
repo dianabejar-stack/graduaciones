@@ -10,6 +10,7 @@ import GuestSimulator    from './pages/GuestSimulator'
 import Reports           from './pages/Reports'
 import Settings          from './pages/Settings'
 import ParallelDashboard from './pages/ParallelDashboard'
+import AdminUsers        from './pages/AdminUsers'
 
 // Pantalla de carga inicial
 function LoadingScreen() {
@@ -77,6 +78,14 @@ export default function App() {
             element={
               <ProtectedRoute roles={['admin']}>
                 <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute roles={['admin']}>
+                <AdminUsers />
               </ProtectedRoute>
             }
           />

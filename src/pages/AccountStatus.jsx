@@ -22,7 +22,7 @@ function installmentBadge(installment) {
 }
 
 export default function AccountStatus() {
-  const { session } = useAuth()
+  const { session, loading: authLoading } = useAuth()
   const [student,      setStudent]      = useState(null)
   const [event,        setEvent]        = useState(null)
   const [installments, setInstallments] = useState([])
@@ -30,7 +30,10 @@ export default function AccountStatus() {
   const [loading,      setLoading]      = useState(true)
   const [error,        setError]        = useState(null)
 
-  useEffect(() => { loadData() }, [])
+  useEffect(() => {
+    if (!authLoading && session?.user?.id) loadData()
+    else if (!authLoading && !session)     setLoading(false)
+  }, [authLoading, session])
 
   async function loadData() {
     setLoading(true)
@@ -78,6 +81,19 @@ export default function AccountStatus() {
       Cargando estado de cuenta...
     </div>
   )
+
+  if (!loading && !student) {
+    return (
+      <div className="max-w-lg mx-auto mt-16 card text-center space-y-3">
+        <p className="text-4xl">👤</p>
+        <p className="text-navy-800 font-semibold text-lg">Sin estudiante vinculado</p>
+        <p className="text-gray-500 text-sm">
+          Tu usuario no tiene un estudiante asociado. Si eres administrador, esta vista es para representantes.
+        </p>
+        {error && <ErrorAlert error={error} />}
+      </div>
+    )
+  }
 
   if (!student || !event) {
     return (
